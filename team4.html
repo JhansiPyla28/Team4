@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infosys</title>
+    <style>
+        #heading{
+            width: 100%;
+        }
+        #main{
+            background-color: #c9dce8ec;
+            height: 100%;
+            padding-top: 5px;
+        }
+        .description{
+			text-align: left;
+            margin:1% 8%;
+            /*font-size: 20px;*/
+            /*font-weight: 500;*/
+            /*font-family: 'Times New Roman', Times, serif;*/
+            /* padding:4px 5% 20px 20px; */
+  		}
+        .sub-div{
+            background-color: white;
+            margin:5px 8%;
+            padding:4px 5% 20px 20px;
+        }
+        .question{
+            font-weight: bold;
+            padding:1px 16% 10px 2px;
+            border-bottom:1px solid rgb(100,100,100);
+            margin-bottom: 30px;
+            font-size: 1.06rem;
+        }
+        .info{
+            font-weight: bold;
+            padding:10px 20% 0px 2px;
+            border-top:1px solid rgb(100,100,100);
+            margin-top: 30px;
+            display:block;
+        }
+        .warn{
+            margin-top: -10px;
+            color:rgb(100,100,100);
+        }
+        .yes,.no{
+            display: inline-block;
+            border:1px solid #ccc;
+            width: 60px;
+            height: 25px;
+            padding:5px 10px 5px 5px;
+            border-radius: 20px;
+            box-shadow: 0 0 2px #888888;
+            cursor: pointer;
+        }
+        .yes input{
+            color:violet;
+            border-radius: 50%;
+        }
+        .ans{
+            margin-top:30px;
+            height: 70px;
+            border-bottom:1px solid rgb(100,100,100);
+            overflow: auto;
+        }
+        /*.ans:hover{
+            border-bottom:2px solid purple;
+        }*/
+        [contenteditable]{
+  			outline: 0px solid transparent;
+  		}
+        .nav{
+            display: inline-block;
+            background-color: black;
+            color:white;
+            border-radius: 10px;
+            padding: 10px 30px;
+            font-weight: bolder;
+            margin:10px;
+        }
+        #adjust{
+            display: flex;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .ticking{
+            margin-top: 2px;
+            padding-left: 8px;
+        }
+        .wrong{
+            margin-top: 2px;
+            padding-left: 10px;
+        }
+        .key{
+            font-size: 12px;
+            font-weight: bold;
+            position: relative;
+            bottom: 5px;
+        }
+        #err{
+            background-color: rgb(111, 211, 211);
+            border-radius: 20px;
+            padding:20px 10px;
+        }
+        table{
+            width: 100%;
+            text-align: left;
+            border-bottom:1px solid rgb(100,100,100,0.5);
+            margin:20px 2px;
+            border-collapse: collapse;
+        }
+        tr{
+            border-bottom: 1px solid gray;
+        }
+        tr:hover{
+            background-color: blanchedalmond;
+            cursor: pointer;
+        }
+        td:nth-child(2),th:nth-child(2){
+            color:red;
+        }
+        a{
+            text-decoration: none;
+            color:black;
+        }
+        footer{
+            background-color:#f4f0ec;
+            width: 100%;
+            height: 40px;
+            padding: 5px;
+            bottom: 0px;
+            left: 0px;
+            position: fixed;
+        }
+        #time{
+            /*float: left;*/
+            /*text-align: center;*/
+            display: inline;
+            margin-left: 400px;
+            font-size: 15px;
+        }
+        #progress{
+            float: left;
+            padding: 0px 95px;
+            color: violet;
+
+        }
+        #next{
+            background-color: black;
+            display: inline;
+            color: white;
+            float: right;
+            padding: 9px 15px;
+            border-radius: 5px;
+            margin-right: 10%;
+        }
+        #feedback{
+            width: 3%;
+            height: 12%;
+            float: right;
+            display: inline;
+            background-color: mediumslateblue;
+            margin-left: 20%;
+            margin-top: 15%;
+            margin-right: -8%;
+        }
+    </style>
+</head>
+<body>
+    <form>
+    <div id="heading">
+        <center><img src="info.png" style="height: 70px;"></center>
+    </div>
+    <div id='main'>
+        <div class="description" style="font-family:sans-serif; font-size: 20px;">Infosys Limited Recruitment</div>
+		<div class="description" style="font-family:Calibri; font-size: 19px;">Electronics City, Hosur Road, Bangalore - 560100, India</div>
+		<div class="description" style="font-size:20px;font-weight: bolder;">APPLICATION FOR EMPLOYMENT</div>
+        <div class="description">Other Details</div>
+        <div id='sub-main'>
+            <div class ='sub-div'>
+                <p class='question'>1.Are you serving/engaged as a director,partner,sole proprietor or in any other equivalent position in any company,firm or business entity?</p>
+                <a id="question0"></a>
+                <div class='yes' onclick='show(this)' title="YES"><img class="ticking" src="tickblack.jpg" width="20px" height="20px"><span class="key">&nbsp;&nbsp;YES</span></div>
+                <div class='no' onclick='unshow(this)' title="NO"><img class="wrong" src="crossblack.png" width="20px" height="20px"><span class="key">&nbsp;&nbsp;NO</span></div>
+
+                <div class='pop' style='display: none;'>
+                    <a name='pop0'></a>
+                    <p class='info'>If Yes,please provide details of the same
+                        <p class="warn">Please do not key in any personally identifiable information belonging to you or any other person(s) which is unrealatable to the business purpose of this survey.</p>
+                        <div class='ans' id="answer" onclick="changeColor();" contenteditable="true">*</div>
+                    </p>
+                </div>        
+            </div>
+        </div>
+            
+        <div id='adjust'>
+            <div class='nav' style="cursor: pointer;">PREVIOUS PAGE</div>
+            <div class='nav' onclick='validate()' style="cursor: pointer;">NEXT PAGE</div>
+        </div>
+        
+        <div id='err'>
+            <b style='color:red;font-size: 1.3rem;'> Errors</b>
+            <table id='tab'>
+                <tr>
+                   <th>Question</th><th>Error</th><th>Action</th>
+                </tr>
+                <tr id='1' onclick='navigate(this)' style='display: none;'>
+                   <td>If Yes,please provide details of the same</td>
+                   <td>This is a required question</td>
+                   <td><a href='#question1'></a><img src='eye.png' height="20px" width="20px"></td>
+                </tr>
+            </table>
+        </div>
+    </div> 
+    </form>
+    <footer>
+        <progress value="47" max="99" id="progress" style="display:inline;"></progress>
+        <b id="time">Estimated Time : 28 mins</b>
+        <button id="next">NEXT PAGE</button>
+    </footer> 
+    <script type='text/javascript'>
+      function divRoll(){
+        var list=[
+            '2.Have you at any time been charged,acquitted or convicted by a court of law in India or outside India?',
+            '3.Has any warrant for your arrest or summons for your appearance been issued or an order prohibiting your entry  into or exit form any country,been issued by a court of law or any governmental authority?',
+            '4.Hava you at any time been subject to or are being subject to any investigations by the financial market regulator such as Securities and Exchange Board of India?',
+            '5.Are you aware of you being subject of any investigation by any governmental authority?',
+            '6.Are there any criminal proceedings pending against you before any court of law in India or outside India?',
+            '7.Are you subject to any *Sanction Laws?'
+        ];
+        for(let i=0;i<6;i++){
+          const l=document.getElementsByClassName('sub-div')[0].cloneNode(true);
+          l.firstElementChild.innerText=list[i];
+          l.getElementsByTagName('a')[0].id="question"+(i+1);
+          l.getElementsByTagName('a')[1].id="pop"+(i+1);
+          document.getElementById('sub-main').append(l);
+        }
+      }
+      divRoll();
+
+      function show(k){
+        var j =(k.nextElementSibling).nextElementSibling;
+        var b=k.nextElementSibling;
+            if(j.style.display=='none'){
+                k.style.border="2px solid purple";
+                k.style.backgroundColor="#FCDFFF";
+                k.style.color="purple";
+                j.style.display='block';
+                b.style.border='1px solid #ccc';
+                b.style.backgroundColor='';
+                b.style.color='black';
+                // var tick=document.getElementsByClassName("ticking");
+                // tick.src="tickviolet.png";
+                document.getElementsByClassName("ticking").src="tickviolet.png"
+            }	
+        }
+        
+        function unshow(k){
+            var b=k.nextElementSibling;
+            if(b.style.display=='block'){
+                var j=k.previousElementSibling;
+                j.style.border='1px solid #ccc';
+                j.style.backgroundColor='';
+                j.style.color='black';
+                b.style.display='none';
+            }
+            k.style.border="2px solid purple";
+            k.style.backgroundColor="#FCDFFF";
+            k.style.color="purple";
+            var wrong=document.getElementsByClassName("wrong");
+            wrong.src="crossviolet.png";
+        }
+        
+        function navigate(k){
+            k.getElementsByTagName('a')[0].click();
+            console.log(k.getElementsByTagName('a')[0].href);
+        }
+
+        function validate(){
+            var l=document.getElementsByClassName('sub-div');
+            var err=[];
+            var count=0;
+            for(i=0;i<l.length;i++){
+                var yes=l[i].getElementsByClassName('yes')[0];
+                var no=l[i].getElementsByClassName('no')[0];
+                if(!(yes.style.color=='purple' || no.style.color=='purple' )){
+                    err[count]=i*10 +1;
+                    count+=1;
+                    continue;
+                }
+                console.log('executing');
+                if(yes.style.color=='purple'){
+                    var ans=l[i].getElementsByClassName('ans')[0].innerText;
+                    console.log(ans);
+                    if(ans.length<2){
+                        err[count]=i*10 +2;
+                        count+=1;
+                    }
+                }
+                
+            }
+            for(let i=0;i<err.length;i++){
+                var k=document.getElementById('1').cloneNode(true);
+                k.id=i;
+                k.style.display='table-row';
+                k.getElementsByTagName('a')[0].href='#question'+ Math.floor(err[i]/10);
+                if(err[i]%10==1){
+                    k.getElementsByTagName('td')[0].innerText='';
+                }
+                document.getElementById('tab').append(k);     
+            }
+        }
+        function changeColor(){
+            document.getElementById("answer").style.borderBottom="2px solid purple";
+        }
+        </script>
+</body>
+</html>
