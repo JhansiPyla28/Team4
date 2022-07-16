@@ -1,29 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infosys</title>
+    <title>Infosys Limited Recruitment</title>
+    <link rel="icon" type="text/css" href="projectLogo.jpg">
     <style>
-        #heading{
-            width: 100%;
+        #header{
+            background-color: white;
+            height: 100px;
         }
         #main{
             background-color: #c9dce8ec;
             height: 100%;
             padding-top: 5px;
+            padding-bottom: 150px;
         }
         .description{
-			text-align: left;
+            text-align: left;
             margin:1% 8%;
-            /*font-size: 20px;*/
-            /*font-weight: 500;*/
-            /*font-family: 'Times New Roman', Times, serif;*/
+            font-size: 20px;
+            font-weight: 500;
+            font-family: 'Times New Roman', Times, serif;
             /* padding:4px 5% 20px 20px; */
-  		}
+        }
         .sub-div{
             background-color: white;
-            margin:5px 8%;
+            margin:1% 8%;
             padding:4px 5% 20px 20px;
         }
         .question{
@@ -47,29 +51,46 @@
         .yes,.no{
             display: inline-block;
             border:1px solid #ccc;
-            width: 60px;
-            height: 25px;
-            padding:5px 10px 5px 5px;
+            background-color: white;
+            width: 80px;
+            padding:5px 8px 5px 5px;
             border-radius: 20px;
-            box-shadow: 0 0 2px #888888;
+            /* box-shadow: 1px 1px 0.3px 0.3px #888888; */
+            /* box-shadow: 0 0 3px #888888; */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: left;
             cursor: pointer;
+        }
+        .yes img,.no img{
+            margin-top:5px;
         }
         .yes input{
             color:violet;
             border-radius: 50%;
         }
         .ans{
-            margin-top:30px;
             height: 70px;
-            border-bottom:1px solid rgb(100,100,100);
+            width: 100%;
             overflow: auto;
+            /*outline: none;*/
+            border: none;
+            border-bottom:1px solid rgb(100,100,100);
+            resize: none;
         }
-        /*.ans:hover{
-            border-bottom:2px solid purple;
-        }*/
+        .slide{
+            position: relative;
+            top:20px;
+        }
+        .ans:focus{
+            border-bottom: 2px solid purple;
+        }
         [contenteditable]{
-  			outline: 0px solid transparent;
-  		}
+            outline: 0px solid transparent;
+        }
+        .required{
+            color:red;
+            display: none;
+        }
         .nav{
             display: inline-block;
             background-color: black;
@@ -78,25 +99,12 @@
             padding: 10px 30px;
             font-weight: bolder;
             margin:10px;
+            cursor: pointer;
         }
-        #adjust{
-            display: flex;
+         #adjust{
+            display:flex;
             justify-content: center;
             font-size: 1.1rem;
-        }
-        .ticking{
-            margin-top: 2px;
-            padding-left: 8px;
-        }
-        .wrong{
-            margin-top: 2px;
-            padding-left: 10px;
-        }
-        .key{
-            font-size: 12px;
-            font-weight: bold;
-            position: relative;
-            bottom: 5px;
         }
         #err{
             background-color: rgb(111, 211, 211);
@@ -112,10 +120,11 @@
         }
         tr{
             border-bottom: 1px solid gray;
+            cursor: pointer;
+            cursor: pointer;
         }
         tr:hover{
             background-color: blanchedalmond;
-            cursor: pointer;
         }
         td:nth-child(2),th:nth-child(2){
             color:red;
@@ -123,6 +132,23 @@
         a{
             text-decoration: none;
             color:black;
+        }
+        .key{
+            font-size: 12px;
+            font-weight: bold;
+            position: relative;
+            bottom: 5px;
+            margin-right: 5px;
+            }
+        @media screen and (max-width: 600px){
+            #adjust{
+                display: block;
+            }
+             .nav{
+                 display: flex;
+                 justify-content: center;
+                 margin:10px 50px;
+             }
         }
         footer{
             background-color:#f4f0ec;
@@ -137,14 +163,21 @@
             /*float: left;*/
             /*text-align: center;*/
             display: inline;
-            margin-left: 400px;
+            margin-left: 20%;
             font-size: 15px;
         }
+        #side{
+            display: inline-block;
+            justify-content: center;
+            margin-left:10% ;
+            font-weight: bold;
+            margin-right: 3px;
+        }
         #progress{
-            float: left;
             padding: 0px 95px;
             color: violet;
-
+            margin-top: 1%;
+            width: 1%;
         }
         #next{
             background-color: black;
@@ -154,82 +187,98 @@
             padding: 9px 15px;
             border-radius: 5px;
             margin-right: 10%;
-        }
-        #feedback{
-            width: 3%;
-            height: 12%;
-            float: right;
-            display: inline;
-            background-color: mediumslateblue;
-            margin-left: 20%;
-            margin-top: 15%;
-            margin-right: -8%;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-    <form>
+<body onload='clear()'>
+    <form action="js.php">
     <div id="heading">
         <center><img src="info.png" style="height: 70px;"></center>
     </div>
     <div id='main'>
         <div class="description" style="font-family:sans-serif; font-size: 20px;">Infosys Limited Recruitment</div>
-		<div class="description" style="font-family:Calibri; font-size: 19px;">Electronics City, Hosur Road, Bangalore - 560100, India</div>
-		<div class="description" style="font-size:20px;font-weight: bolder;">APPLICATION FOR EMPLOYMENT</div>
+        <div class="description" style="font-family:Calibri; font-size: 19px;">Electronics City, Hosur Road, Bangalore - 560100, India</div>
+        <div class="description" style="font-size:20px;font-weight: bolder;">APPLICATION FOR EMPLOYMENT</div>
         <div class="description">Other Details</div>
         <div id='sub-main'>
             <div class ='sub-div'>
                 <p class='question'>1.Are you serving/engaged as a director,partner,sole proprietor or in any other equivalent position in any company,firm or business entity?</p>
                 <a id="question0"></a>
-                <div class='yes' onclick='show(this)' title="YES"><img class="ticking" src="tickblack.jpg" width="20px" height="20px"><span class="key">&nbsp;&nbsp;YES</span></div>
-                <div class='no' onclick='unshow(this)' title="NO"><img class="wrong" src="crossblack.png" width="20px" height="20px"><span class="key">&nbsp;&nbsp;NO</span></div>
+                <button class='yes' type="button" onclick='show(this)'><img class="ticking" src="tickblack.jpg" width="20px" height="20px"><span class="key">&nbsp;YES</span></button>
+                <button class='no' type="button" onclick='unshow(this)'><img class="wrong" src="crossblack.png" width="20px" height="20px"><span class="key">&nbsp;NO</span></button>
 
-                <div class='pop' style='display: none;'>
+                <div class='pop' style='display: none;' onclick='slide(this)'>
                     <a name='pop0'></a>
                     <p class='info'>If Yes,please provide details of the same
                         <p class="warn">Please do not key in any personally identifiable information belonging to you or any other person(s) which is unrealatable to the business purpose of this survey.</p>
-                        <div class='ans' id="answer" onclick="changeColor();" contenteditable="true">*</div>
+                        <span class='slide'>*</span>
+                        <textarea class='ans' contenteditable="true" onblur="progress(this,1)"></textarea>
                     </p>
-                </div>        
+                </div>
+                <div class='required'>* This is required question</div>
             </div>
         </div>
-            
+        <div class ='sub-div'>
+            <p class='question'>7.Are you subject to any *Sanction Laws?<br><br>
+            <i>  *Sanction Laws means all applicable financial,economic and trade sanctions (whether primary or secondary),and export control laws and
+                regulations(or any similar restrictions) imposed by the United Nations or the govenments of Australia,The United Kingdom,European Union and the United States of America or any other country.
+            </i>
+            </p>
+            <a id="question6"></a>
+            <button class='yes' type="button" onclick='show(this)'><img class="ticking" src="tickblack.jpg" width="20px" height="20px"><span class="key">&nbsp;YES</span></button>
+            <button class='no' type="button" onclick='unshow(this)'><img class="wrong" src="crossblack.png" width="20px" height="20px"><span class="key">&nbsp;NO</span></button>
+
+            <div class='pop' style='display: none;' onclick='slide(this)'>
+                <a name='pop6'></a>
+                <p class='info'>If Yes,please provide details of the same
+                    <p class="warn">Please do not key in any personally identifiable information belonging to you or any other person(s) which is unrealatable to the business purpose of this survey.</p>
+                    <span class='slide'>*</span>
+                    <textarea class='ans' contenteditable="true" onblur="progress(this,1)"></textarea>
+                </p>
+            </div>
+            <div class='required'>* This is required question</div>
+        </div>
         <div id='adjust'>
-            <div class='nav' style="cursor: pointer;">PREVIOUS PAGE</div>
-            <div class='nav' onclick='validate()' style="cursor: pointer;">NEXT PAGE</div>
+            <button type="button" class='nav'>PREVIOUS PAGE</button>
+            <button type="button" class='nav' onclick='validate()'>NEXT PAGE</button>
         </div>
         
-        <div id='err'>
-            <b style='color:red;font-size: 1.3rem;'> Errors</b>
-            <table id='tab'>
-                <tr>
+        <div id='err' style='display: none;'>
+          <b style='color:red;font-size: 1.3rem;'> Errors</b>
+           <table id='tab'>
+               <tr>
                    <th>Question</th><th>Error</th><th>Action</th>
-                </tr>
-                <tr id='1' onclick='navigate(this)' style='display: none;'>
+               </tr>
+               <tr id='1' onclick='navigate(this)' style='display: none;'>
                    <td>If Yes,please provide details of the same</td>
                    <td>This is a required question</td>
                    <td><a href='#question1'></a><img src='eye.png' height="20px" width="20px"></td>
-                </tr>
-            </table>
+               </tr>
+           </table>
         </div>
-    </div> 
-    </form>
+    </div>
+</form>
     <footer>
-        <progress value="47" max="99" id="progress" style="display:inline;"></progress>
+        <div id='side'><span id='progressValue'>57</span> of 97 answered </div><progress value="57" max="99" id="progress" style="display:inline;"></progress>
         <b id="time">Estimated Time : 28 mins</b>
         <button id="next">NEXT PAGE</button>
-    </footer> 
+    </footer>
     <script type='text/javascript'>
+    function clear(){
+        document.getElementsByClassName('ans')[0].value='';
+        divRoll();
+    }
       function divRoll(){
         var list=[
             '2.Have you at any time been charged,acquitted or convicted by a court of law in India or outside India?',
             '3.Has any warrant for your arrest or summons for your appearance been issued or an order prohibiting your entry  into or exit form any country,been issued by a court of law or any governmental authority?',
             '4.Hava you at any time been subject to or are being subject to any investigations by the financial market regulator such as Securities and Exchange Board of India?',
             '5.Are you aware of you being subject of any investigation by any governmental authority?',
-            '6.Are there any criminal proceedings pending against you before any court of law in India or outside India?',
-            '7.Are you subject to any *Sanction Laws?'
+            '6.Are there any criminal proceedings pending against you before any court of law in India or outside India?'
         ];
-        for(let i=0;i<6;i++){
+        
+        for(let i=0;i<5;i++){
           const l=document.getElementsByClassName('sub-div')[0].cloneNode(true);
           l.firstElementChild.innerText=list[i];
           l.getElementsByTagName('a')[0].id="question"+(i+1);
@@ -237,39 +286,44 @@
           document.getElementById('sub-main').append(l);
         }
       }
-      divRoll();
 
       function show(k){
+       
         var j =(k.nextElementSibling).nextElementSibling;
         var b=k.nextElementSibling;
             if(j.style.display=='none'){
                 k.style.border="2px solid purple";
                 k.style.backgroundColor="#FCDFFF";
                 k.style.color="purple";
+                k.firstElementChild.src='tickviolet.png';
                 j.style.display='block';
-                b.style.border='1px solid #ccc';
+
                 b.style.backgroundColor='';
                 b.style.color='black';
-                // var tick=document.getElementsByClassName("ticking");
-                // tick.src="tickviolet.png";
-                document.getElementsByClassName("ticking").src="tickviolet.png"
-            }	
+                b.firstElementChild.src="crossblack.png";
+            }
+            // var ans=(k.parentNode).getElementsByClassName('ans')[0].value;
+            // console.log(ans.length);
+            // if(ans.length>0){
+            //     progress(k,1);
+            // }
         }
         
         function unshow(k){
             var b=k.nextElementSibling;
             if(b.style.display=='block'){
                 var j=k.previousElementSibling;
-                j.style.border='1px solid #ccc';
+                j.style.border='1px solid black';
                 j.style.backgroundColor='';
                 j.style.color='black';
+                j.firstElementChild.src='tickblack.jpg';
                 b.style.display='none';
             }
             k.style.border="2px solid purple";
             k.style.backgroundColor="#FCDFFF";
             k.style.color="purple";
-            var wrong=document.getElementsByClassName("wrong");
-            wrong.src="crossviolet.png";
+            k.firstElementChild.src='crossviolet.png';
+            progress(k,2);
         }
         
         function navigate(k){
@@ -277,11 +331,18 @@
             console.log(k.getElementsByTagName('a')[0].href);
         }
 
+        function slide(k){
+            k.getElementsByClassName('slide')[0].style.top='0px';
+            k.getElementsByClassName('slide')[0].style.color='red';
+        }
+
         function validate(){
             var l=document.getElementsByClassName('sub-div');
+            document.getElementById('err').style.display='none';
             var err=[];
             var count=0;
             for(i=0;i<l.length;i++){
+                l[i].getElementsByClassName('required')[0].style.display='none';
                 var yes=l[i].getElementsByClassName('yes')[0];
                 var no=l[i].getElementsByClassName('no')[0];
                 if(!(yes.style.color=='purple' || no.style.color=='purple' )){
@@ -291,7 +352,7 @@
                 }
                 console.log('executing');
                 if(yes.style.color=='purple'){
-                    var ans=l[i].getElementsByClassName('ans')[0].innerText;
+                    var ans=l[i].getElementsByClassName('ans')[0].value;
                     console.log(ans);
                     if(ans.length<2){
                         err[count]=i*10 +2;
@@ -300,20 +361,51 @@
                 }
                 
             }
+            if(err.length>0){
+                  document.getElementById('err').style.display='block';
+            }
+            var errList=document.getElementsByTagName('tr');
+            var len=errList.length;
+            for(let i=2;i<len;i++){
+                errList[2].remove();
+            }
+            console.log(errList.length);        
             for(let i=0;i<err.length;i++){
                 var k=document.getElementById('1').cloneNode(true);
                 k.id=i;
                 k.style.display='table-row';
-                k.getElementsByTagName('a')[0].href='#question'+ Math.floor(err[i]/10);
+                var ques=Math.floor(err[i]/10);
+                console.log(ques);
                 if(err[i]%10==1){
+                    k.getElementsByTagName('a')[0].href='#question'+ques;
                     k.getElementsByTagName('td')[0].innerText='';
+                }else{
+                    k.getElementsByTagName('a')[0].href='#pop'+ Math.floor(err[i]/10);
                 }
+                l[ques].getElementsByClassName('required')[0].style.display='block';
                 document.getElementById('tab').append(k);     
             }
         }
-        function changeColor(){
-            document.getElementById("answer").style.borderBottom="2px solid purple";
+        
+        var questions=[0,0,0,0,0,0,0];
+        function progress(k,opt){
+            var l='';
+            var index;
+            if(opt==1){
+                l=(k.parentNode).firstElementChild;
+                index=parseInt((l.id)[3]);
+            }else{
+                l=(k.previousElementSibling).previousElementSibling;
+                index=parseInt((l.id)[8]);
+            }
+            console.log(index);
+            if(questions[index]!=1){
+                questions[index]=1;
+                document.getElementById('progress').value=document.getElementById('progress').value+1;
+                document.getElementById('progressValue').innerText=parseInt(document.getElementById('progressValue').innerText)+1;
+            }
+            
         }
-        </script>
+         </script>
 </body>
 </html>
